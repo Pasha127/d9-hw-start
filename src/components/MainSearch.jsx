@@ -45,13 +45,14 @@ const MainSearch = (props) => {
       const response = await fetch(baseEndpoint + props.query + '&limit=20')
       if (response.ok) {
         const { data } = await response.json()
-        props.setJobs(data)
+        props.setJobs(data);
+       // console.log(data);
       } else {
         alert('Error fetching results')
       }
     } catch (error) {
       console.log(error)
-    }
+    }//finally{console.log(props.jobs)}
   }
 
   return (

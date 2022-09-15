@@ -1,5 +1,15 @@
 import { Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+/* import { connect } from "react-redux"; */
+/* const mapStateToProps = state => {
+  return {
+    query: state.query,
+    jobs: state.jobs
+    
+  };
+};
+ */
+
 
 const Job = ({ data }) => (
   <Row
@@ -17,4 +27,4 @@ const Job = ({ data }) => (
   </Row>
 )
 
-export default Job
+export default /* connect(mapStateToProps) */(Job)

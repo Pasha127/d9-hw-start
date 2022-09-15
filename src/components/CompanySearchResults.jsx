@@ -2,10 +2,29 @@ import { useEffect, useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import Job from './Job'
 import { useParams } from 'react-router-dom'
+import { connect } from "react-redux";
 
-const CompanySearchResults = () => {
-  const [jobs, setJobs] = useState([])
-  const params = useParams()
+const mapStateToProps = state => {
+  return {
+    query: state.query,
+    jobs: state.jobs
+    
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    setJobs: jobs =>{
+      dispatch({
+        type:"JOBS",
+        payload: jobs
+      })
+    }
+  };
+};
+
+const CompanySearchResults = (props) => {
+/*   const [jobs, setJobs] = useState([])*/
+  const params = useParams() 
 
   const baseEndpoint = 'https://strive-jobs-api.herokuapp.com/jobs?company='
 
@@ -18,7 +37,7 @@ const CompanySearchResults = () => {
       const response = await fetch(baseEndpoint + params.companyName)
       if (response.ok) {
         const { data } = await response.json()
-        setJobs(data)
+        props.setJobs(data)
       } else {
         alert('Error fetching results')
       }
@@ -31,7 +50,7 @@ const CompanySearchResults = () => {
     <Container>
       <Row>
         <Col>
-          {jobs.map((jobData) => (
+          {props.jobs.map((jobData) => (
             <Job key={jobData._id} data={jobData} />
           ))}
         </Col>
@@ -40,4 +59,4 @@ const CompanySearchResults = () => {
   )
 }
 
-export default CompanySearchResults
+export default connect(mapStateToProps, mapDispatchToProps)(CompanySearchResults)

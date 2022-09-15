@@ -12,7 +12,7 @@ const mainReducer = (state = initialState, action) => {
       case "JOBS":
         return {
           ...state,
-          query: action.payload          
+          jobs: action.payload          
         };           
         /* case "EXAMPLE":
           return {
