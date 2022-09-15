@@ -19,11 +19,15 @@ const Job = ({ data }) => (
     <Col xs={3}>
       <Link to={`/${data.company_name}`}>{data.company_name}</Link>
     </Col>
-    <Col xs={9}>
+    <Col xs={8}>
       <a href={data.url} target="_blank" rel="noreferrer">
         {data.title}
       </a>
     </Col>
+    <Col xs={1}>
+      <p className='favButton'>⭐</p>
+    </Col>
+
   </Row>
 )
 

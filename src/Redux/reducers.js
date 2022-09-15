@@ -14,16 +14,11 @@ const mainReducer = (state = initialState, action) => {
           ...state,
           jobs: action.payload          
         };           
-        /* case "EXAMPLE":
+      case "FAV":
           return {
             ...state,
-            cart: {
-              ...state.cart,
-              //   content: state.cart.content.concat(action.payload),
-              content: [...state.cart.content, action.payload],
-            },
-            
-          }; */
+            favs: action.payload
+          };
         
       default:
         return state; 
