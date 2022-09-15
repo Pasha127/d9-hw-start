@@ -1,25 +1,51 @@
 import { useState } from 'react'
 import { Container, Row, Col, Form } from 'react-bootstrap'
 import Job from './Job'
+import { connect } from "react-redux";
 
-const MainSearch = () => {
-  const [query, setQuery] = useState('')
+const mapStateToProps = state => {
+  return {
+    query: state.query,
+    jobs: state.jobs
+    
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setQuery: query => {
+      dispatch({
+        type: "SEARCH",
+        payload: query,
+      });
+    },
+    setJobs: jobs =>{
+      dispatch({
+        type:"JOBS",
+        payload: jobs
+      })
+    }
+  };
+};
+
+const MainSearch = (props) => {
+ /*  const [query, setQuery] = useState('')
   const [jobs, setJobs] = useState([])
-
+ */
   const baseEndpoint = 'https://strive-jobs-api.herokuapp.com/jobs?search='
 
   const handleChange = (e) => {
-    setQuery(e.target.value)
+    props.setQuery(e.target.value)
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     try {
-      const response = await fetch(baseEndpoint + query + '&limit=20')
+      const response = await fetch(baseEndpoint + props.query + '&limit=20')
       if (response.ok) {
         const { data } = await response.json()
-        setJobs(data)
+        props.setJobs(data)
       } else {
         alert('Error fetching results')
       }
@@ -38,14 +64,14 @@ const MainSearch = () => {
           <Form onSubmit={handleSubmit}>
             <Form.Control
               type="search"
-              value={query}
+              value={props.query}
               onChange={handleChange}
               placeholder="type and press Enter"
             />
           </Form>
         </Col>
         <Col xs={10} className="mx-auto mb-5">
-          {jobs.map((jobData) => (
+          {props.jobs.map((jobData) => (
             <Job key={jobData._id} data={jobData} />
           ))}
         </Col>
@@ -54,4 +80,4 @@ const MainSearch = () => {
   )
 }
 
-export default MainSearch
+export default connect(mapStateToProps, mapDispatchToProps)(MainSearch)
