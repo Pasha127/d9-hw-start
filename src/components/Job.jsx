@@ -25,7 +25,7 @@ const Job = ({ data }) => (
       </a>
     </Col>
     <Col xs={1}>
-      <p className='favButton'>⭐</p>
+      <p className='favButton'><span>⭐</span></p>
     </Col>
 
   </Row>
