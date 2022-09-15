@@ -1,53 +1,76 @@
-/* import { Link } from 'react-router-dom'
+import { Container, Row, Col, Button } from 'react-bootstrap'
+import Job from './Job'
 import { connect } from "react-redux";
-
+import { Link } from 'react-router-dom';
 
 const mapStateToProps = state => {
-    return {
-      cart: state.cart.content,
-      // cart is now a prop holding the cart array coming from the redux store
-    };
+  return {
+    query: state.query,
+    jobs: state.jobs,
+    favs: state.favs
+    
   };
-  
-  const mapDispatchToProps = dispatch => {
-    return {
-      removeFromCart: indexToRemove => {
-        dispatch({
-          type: "REMOVE_FROM_CART",
-          payload: indexToRemove,
-        });
-      },
-    };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setQuery: query => {
+      dispatch({
+        type: "SEARCH",
+        payload: query,
+      });
+    },
+    setJobs: jobs =>{
+      dispatch({
+        type:"JOBS",
+        payload: jobs
+      })
+    }
   };
-  // the cart prop initially is undefined, since we're not passing any prop from App.js!
-// since cart is undefined, we're assigning to it a default value with the = operator
-// the default value we're assigning to it is []
-const Favorites = ({ cart = [], removeFromCart }) => (
-    <Row>
-      <Col sm={12}>
-        <ul style={{ listStyle: "none" }}>
-          {cart.map((book, i) => (
-            <li key={i} className="my-4">
-              <Button
-                variant="danger"
-                onClick={() => {
-                  removeFromCart(i);
-                }}
-              >
-                <FaTrash />
-              </Button>
-              <img className="book-cover-small" src={book.imageUrl} alt="book selected" />
-              {book.title}
-            </li>
-          ))}
-        </ul>
-      </Col>
+};
+
+const Favorites = (props) => {
+
+  const baseEndpoint = 'https://strive-jobs-api.herokuapp.com/jobs?search='
+
+  const handleChange = (e) => {
+    props.setQuery(e.target.value)
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    try {
+      const response = await fetch(baseEndpoint + props.query + '&limit=20')
+      if (response.ok) {
+        const { data } = await response.json()
+        props.setJobs(data);
+       // console.log(data);
+      } else {
+        alert('Error fetching results')
+      }
+    } catch (error) {
+      console.log(error)
+    }//finally{console.log(props.jobs)}
+  }
+
+  return (
+    <Container>
       <Row>
-        <Col sm={12} className="font-weight-bold mb-3 ml-4">
-          TOTAL: {cart.reduce((acc, currentValue) => acc + parseFloat(currentValue.price), 0)}$
+        <Col xs={10} className="mx-auto my-3">
+        <div className='d-flex flex-row align-items-center'>
+          <h1 className='mr-auto'>Remote Jobs Search</h1>
+          <Link to="/"><Button>Go Home</Button></Link> 
+          </div>
+        </Col>        
+        <Col xs={10} className="mx-auto mb-5">
+          {props.favs.map((jobData) => (
+            <Job key={jobData._id} data={jobData} isCompany={false} button={false}/>
+          ))}
         </Col>
       </Row>
-    </Row>
-  );
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(Favorites); */
+    </Container>
+  )
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites)

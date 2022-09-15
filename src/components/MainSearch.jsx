@@ -1,12 +1,13 @@
-import { useState } from 'react'
-import { Container, Row, Col, Form } from 'react-bootstrap'
+import { Container, Row, Col, Form,Button } from 'react-bootstrap'
 import Job from './Job'
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
 
 const mapStateToProps = state => {
   return {
     query: state.query,
-    jobs: state.jobs
+    jobs: state.jobs,
+    favs: state.favs
     
   };
 };
@@ -29,9 +30,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 const MainSearch = (props) => {
- /*  const [query, setQuery] = useState('')
-  const [jobs, setJobs] = useState([])
- */
+
   const baseEndpoint = 'https://strive-jobs-api.herokuapp.com/jobs?search='
 
   const handleChange = (e) => {
@@ -59,7 +58,10 @@ const MainSearch = (props) => {
     <Container>
       <Row>
         <Col xs={10} className="mx-auto my-3">
-          <h1>Remote Jobs Search</h1>
+          <div className='d-flex flex-row align-items-center'>
+          <h1 className='mr-auto'>Remote Jobs Search</h1>
+          <Link to="/favs"><Button>See Favorites</Button></Link> 
+          </div>
         </Col>
         <Col xs={10} className="mx-auto">
           <Form onSubmit={handleSubmit}>
@@ -73,7 +75,7 @@ const MainSearch = (props) => {
         </Col>
         <Col xs={10} className="mx-auto mb-5">
           {props.jobs.map((jobData) => (
-            <Job key={jobData._id} data={jobData} />
+            <Job key={jobData._id} data={jobData} isCompany={false} button={true} />
           ))}
         </Col>
       </Row>

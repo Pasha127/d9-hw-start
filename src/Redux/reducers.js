@@ -1,6 +1,7 @@
 const initialState = {    
     query: "" ,
     jobs: [],  
+    favs: [],  
   };
 const mainReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -14,10 +15,15 @@ const mainReducer = (state = initialState, action) => {
           ...state,
           jobs: action.payload          
         };           
-      case "FAV":
+      case "FAV+":          
           return {
             ...state,
-            favs: action.payload
+            favs: [...state.favs, action.payload]
+          };
+      case "FAV-":
+          return {
+            ...state,
+            favs: state.favs.filter((job) => job._id !== action.payload._id)
           };
         
       default:

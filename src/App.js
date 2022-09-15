@@ -3,6 +3,8 @@ import './App.css'
 import MainSearch from './components/MainSearch'
 import CompanySearchResults from './components/CompanySearchResults'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Favorites from './components/Favorites'
+import FourOFour from './components/404'
 
 function App() {
   return (
@@ -10,6 +12,8 @@ function App() {
       <Routes>
         <Route path="/" element={<MainSearch />} />
         <Route path="/:companyName" element={<CompanySearchResults />} />
+        <Route path="/favs" element={<Favorites/>} />
+        <Route path="*" element={<FourOFour/>} />
       </Routes>
     </BrowserRouter>
   )

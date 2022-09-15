@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { useEffect } from 'react'
+import { Container, Row, Col,Button } from 'react-bootstrap'
 import Job from './Job'
 import { useParams } from 'react-router-dom'
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
 
 const mapStateToProps = state => {
   return {
@@ -50,8 +51,12 @@ const CompanySearchResults = (props) => {
     <Container>
       <Row>
         <Col>
+        <div className='d-flex flex-row align-items-center'>
+          <h1 className='mr-auto'>Selected Company</h1>
+          <Link to="/"><Button>Go Home</Button></Link> 
+          </div>
           {props.jobs.map((jobData) => (
-            <Job key={jobData._id} data={jobData} />
+            <Job key={jobData._id} data={jobData} isCompany={true} />
           ))}
         </Col>
       </Row>
