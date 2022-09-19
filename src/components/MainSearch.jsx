@@ -2,6 +2,7 @@ import { Container, Row, Col, Form,Button } from 'react-bootstrap'
 import Job from './Job'
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
+import { setQuery } from '../Redux/Actions/Actions';
 
 const mapStateToProps = state => {
   return {
@@ -15,10 +16,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     setQuery: query => {
-      dispatch({
-        type: "SEARCH",
-        payload: query,
-      });
+      dispatch(setQuery(query));
     },
     setJobs: jobs =>{
       dispatch({
