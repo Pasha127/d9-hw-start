@@ -3,7 +3,7 @@ import Job from './Job'
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 import { handleSubmitWithThunk, setQuery } from '../Redux/Actions/Actions';
-import { setJobs } from '../Redux/Actions/Actions';
+import Loader from './Loader';
 
 const mapStateToProps = state => {
   return {
@@ -39,6 +39,8 @@ const MainSearch = (props) => {
 }
 
   return (
+    <>
+    <Loader></Loader>
     <Container>
       <Row>
         <Col xs={10} className="mx-auto my-3">
@@ -64,6 +66,7 @@ const MainSearch = (props) => {
         </Col>
       </Row>
     </Container>
+    </>
   )
 }
 

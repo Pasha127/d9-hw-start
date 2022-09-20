@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 import { setQuery } from '../Redux/Actions/Actions';
 import { setJobs } from '../Redux/Actions/Actions';
+import Loader from './Loader';
 
 const mapStateToProps = state => {
   return {
@@ -27,31 +28,9 @@ const mapDispatchToProps = dispatch => {
 
 
 const Favorites = (props) => {
-
-  const baseEndpoint = 'https://strive-jobs-api.herokuapp.com/jobs?search='
-
-  const handleChange = (e) => {
-    props.setQuery(e.target.value)
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    try {
-      const response = await fetch(baseEndpoint + props.query + '&limit=20')
-      if (response.ok) {
-        const { data } = await response.json()
-        props.setJobs(data);
-       // console.log(data);
-      } else {
-        alert('Error fetching results')
-      }
-    } catch (error) {
-      console.log(error)
-    }//finally{console.log(props.jobs)}
-  }
-
   return (
+    <>
+    <Loader></Loader>
     <Container>
       <Row>
         <Col xs={10} className="mx-auto my-3">
@@ -67,6 +46,7 @@ const Favorites = (props) => {
         </Col>
       </Row>
     </Container>
+    </>
   )
 }
 

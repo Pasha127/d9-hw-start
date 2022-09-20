@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 import { setJobs } from '../Redux/Actions/Actions';
+import Loader from './Loader';
 
 const mapStateToProps = state => {
   return {
@@ -46,6 +47,8 @@ const CompanySearchResults = (props) => {
   }
 
   return (
+    <>
+    <Loader></Loader>
     <Container>
       <Row>
         <Col>
@@ -59,6 +62,7 @@ const CompanySearchResults = (props) => {
         </Col>
       </Row>
     </Container>
+    </>
   )
 }
 

@@ -2,7 +2,12 @@ export const SEARCH = "SEARCH";
 export const JOBS = "JOBS";
 export const FAV_PLUS = "FAV+";
 export const FAV_MINUS = "FAV-";
+export const LOADING = "LOADING";
 
+export const setLoading = isLoading =>({
+    type: LOADING,
+    payload: isLoading
+});
 export const setQuery = query =>({
     type: SEARCH,
     payload: query
@@ -20,6 +25,7 @@ export const setDelFav = fav =>({
     payload: fav
   });
 export const handleSubmitWithThunk = (q) => {
+    setLoading(true);
     const baseEndpoint = 'https://strive-jobs-api.herokuapp.com/jobs?search='
     console.log("1 think")
     return async (dispatch, getState)=>{
@@ -35,5 +41,5 @@ export const handleSubmitWithThunk = (q) => {
       }
     } catch (error) {
       console.log(error)
-    }finally{console.log("3 thunk")}
+    }finally{console.log("3 thunk");setLoading(false);}
   }}

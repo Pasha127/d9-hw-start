@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
 import {encryptTransform} from 'redux-persist-transform-encrypt';
+import LoadReducer from "../Reducers/LoadReducer";
 
 
 const persistConfig = {
@@ -23,12 +24,14 @@ const persistConfig = {
 
 export const initialState = {
   search: {jobs:[],query:"" },
-  favs:{favs:[]}
+  favs:{favs:[]},
+  load:{loaded:false}
 } 
 
 const bigReducer = combineReducers({
   search: JobsReducer,
   favs: FavReducer,
+  load: LoadReducer
   });
   
   const persistedReducer = persistReducer(persistConfig, bigReducer)
