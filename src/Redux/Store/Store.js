@@ -2,7 +2,10 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import FavReducer from "../Reducers/FavReducer";
 import JobsReducer from "../Reducers/JobsReducer";
 
-
+export const initialState = {
+  search: {jobs:[],query:"" },
+  favs:{favs:[]}
+} 
 
 const bigReducer = combineReducers({
   search: JobsReducer,
@@ -13,4 +16,3 @@ const store = configureStore({
   });
   
   export default store;
-

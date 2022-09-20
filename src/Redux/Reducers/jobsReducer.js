@@ -1,9 +1,11 @@
 import { JOBS, SEARCH } from "../Actions/Actions";
-const initialState = {    
+import { initialState } from "../Store/Store";
+
+/* const initialState = {    
     query: "" ,
     jobs: [],        
-  };
-const JobsReducer = (state = initialState, action) => {
+  }; */
+const JobsReducer = (state = initialState.search, action) => {
     switch (action.type) {
       case SEARCH:
         return {

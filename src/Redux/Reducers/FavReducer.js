@@ -1,19 +1,18 @@
 import { FAV_MINUS, FAV_PLUS } from "../Actions/Actions";
+import { initialState } from "../Store/Store";
 
-const initialState = {    
-    favs: [],  
-  };
-const FavReducer = (state = initialState, action) => {
+
+const FavReducer = (state = initialState.favs, action) => {
     switch (action.type) {                
       case FAV_PLUS:          
           return {
             ...state,
-            favs: [...state.favs.favs, action.payload]
+            favs: [...state.favs, action.payload]
           };
       case FAV_MINUS:
           return {
             ...state,
-            favs: state.favs.favs.filter((job) => job._id !== action.payload._id)
+            favs: state.favs.filter((job) => job._id !== action.payload._id)
           };
         
       default:
