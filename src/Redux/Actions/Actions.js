@@ -20,9 +20,11 @@ export const setDelFav = fav =>({
     payload: fav
   });
 export const handleSubmitWithThunk = (e,baseEndpoint,q) => {
+    console.log("1 think")
     return async (dispatch, getState)=>{
     try {
-      const response = await fetch(baseEndpoint + q + '&limit=20')
+        console.log("2 thank",baseEndpoint,q)
+      const response = await fetch(baseEndpoint + q + '&limit=40')
       if (response.ok) {
         const { data } = await response.json()
         dispatch(setJobs(data))
@@ -32,5 +34,5 @@ export const handleSubmitWithThunk = (e,baseEndpoint,q) => {
       }
     } catch (error) {
       console.log(error)
-    }//finally{console.log(props.jobs)}
+    }finally{console.log("3 thunk")}
   }}

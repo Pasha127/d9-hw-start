@@ -31,7 +31,9 @@ const MainSearch = (props) => {
   }
   const handleSubmit = (e) =>{
     e.preventDefault();
-  handleSubmitWithThunk(e,baseEndpoint,props.query)}
+    console.log("0 consider",baseEndpoint,props.query);
+  handleSubmitWithThunk(e,baseEndpoint,props.query)
+}
 
   return (
     <Container>
