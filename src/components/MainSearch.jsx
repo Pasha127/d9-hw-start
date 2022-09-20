@@ -18,21 +18,24 @@ const mapDispatchToProps = dispatch => {
   return {
     setQueryForD: query => {
       dispatch(setQuery(query));
-    }
-  };
+    },
+    handleSub: query => { 
+      dispatch( handleSubmitWithThunk(query));
+    }    
+  };  
 };
 
 const MainSearch = (props) => {
-
-  const baseEndpoint = 'https://strive-jobs-api.herokuapp.com/jobs?search='
+  
+  
 
   const handleChange = (e) => {
     props.setQueryForD(e.target.value)
   }
   const handleSubmit = (e) =>{
     e.preventDefault();
-    console.log("0 consider",baseEndpoint,props.query);
-  handleSubmitWithThunk(e,baseEndpoint,props.query)
+    console.log("0 consider",props.query);
+    props.handleSub(props.query);
 }
 
   return (

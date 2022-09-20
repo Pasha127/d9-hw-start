@@ -19,7 +19,8 @@ export const setDelFav = fav =>({
     type:"FAV-",
     payload: fav
   });
-export const handleSubmitWithThunk = (e,baseEndpoint,q) => {
+export const handleSubmitWithThunk = (q) => {
+    const baseEndpoint = 'https://strive-jobs-api.herokuapp.com/jobs?search='
     console.log("1 think")
     return async (dispatch, getState)=>{
     try {
