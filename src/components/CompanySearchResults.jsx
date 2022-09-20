@@ -4,21 +4,19 @@ import Job from './Job'
 import { useParams } from 'react-router-dom'
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
+import { setJobs } from '../Redux/Actions/Actions';
 
 const mapStateToProps = state => {
   return {
-    query: state.query,
-    jobs: state.jobs
+    query: state.search.query,
+    jobs: state.search.jobs
     
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
     setJobs: jobs =>{
-      dispatch({
-        type:"JOBS",
-        payload: jobs
-      })
+      dispatch(setJobs(jobs))
     }
   };
 };

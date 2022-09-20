@@ -7,7 +7,30 @@ export const setQuery = query =>({
     type: SEARCH,
     payload: query
 });
-
 export const setJobs = jobs =>({
-    
-})
+    type:"JOBS",
+    payload: jobs
+});
+export const setFav = fav =>({
+    type:"FAV+",
+    payload: fav
+  });
+export const setDelFav = fav =>({
+    type:"FAV-",
+    payload: fav
+  });
+export const handleSubmitWithThunk = (e,baseEndpoint,q) => {
+    return async (dispatch, getState)=>{
+    try {
+      const response = await fetch(baseEndpoint + q + '&limit=20')
+      if (response.ok) {
+        const { data } = await response.json()
+        dispatch(setJobs(data))
+       // console.log(data);
+      } else {
+        alert('Error fetching results')
+      }
+    } catch (error) {
+      console.log(error)
+    }//finally{console.log(props.jobs)}
+  }}

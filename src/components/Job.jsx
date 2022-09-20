@@ -1,38 +1,31 @@
 import { Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { connect } from "react-redux"; 
+import { setQuery } from '../Redux/Actions/Actions.js';
+
+import { setJobs } from '../Redux/Actions/Actions.js';
+import { setFav} from '../Redux/Actions/Actions.js';
+import { setDelFav } from '../Redux/Actions/Actions.js';
 const mapStateToProps = state => {
   return {
-    query: state.query,
-    jobs: state.jobs,
-    favs: state.fav    
+    query: state.search.query,
+    jobs: state.search.jobs,
+    favs: state.favs.favs    
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
     setQuery: query => {
-      dispatch({
-        type: "SEARCH",
-        payload: query,
-      });
+      dispatch(setQuery(query));
     },
     setJobs: jobs =>{
-      dispatch({
-        type:"JOBS",
-        payload: jobs
-      })
+      dispatch(setJobs(jobs))
     },
     setFav: fav =>{
-      dispatch({
-        type:"FAV+",
-        payload: fav
-      })
+      dispatch(setFav(fav))
     },
     setDelFav: fav =>{
-      dispatch({
-        type:"FAV-",
-        payload: fav
-      })
+      dispatch(setDelFav(fav))
     }
   };
 };

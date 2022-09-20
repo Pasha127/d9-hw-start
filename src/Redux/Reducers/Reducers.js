@@ -1,4 +1,5 @@
-const initialState = {    
+
+/* const initialState = {    
     query: "" ,
     jobs: [],  
     favs: [],  
@@ -30,4 +31,4 @@ const mainReducer = (state = initialState, action) => {
         return state; 
     }
   };
-export default mainReducer;
+export default mainReducer; */

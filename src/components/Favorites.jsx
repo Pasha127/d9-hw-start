@@ -2,12 +2,14 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import Job from './Job'
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
+import { setQuery } from '../Redux/Actions/Actions';
+import { setJobs } from '../Redux/Actions/Actions';
 
 const mapStateToProps = state => {
   return {
-    query: state.query,
-    jobs: state.jobs,
-    favs: state.favs
+    query: state.search.query,
+    jobs: state.search.jobs,
+    favs: state.favs.favs
     
   };
 };
@@ -15,19 +17,14 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     setQuery: query => {
-      dispatch({
-        type: "SEARCH",
-        payload: query,
-      });
+      dispatch(setQuery(query));
     },
     setJobs: jobs =>{
-      dispatch({
-        type:"JOBS",
-        payload: jobs
-      })
+      dispatch(setJobs(jobs))
+    },
     }
   };
-};
+
 
 const Favorites = (props) => {
 

@@ -2,27 +2,22 @@ import { Container, Row, Col, Form,Button } from 'react-bootstrap'
 import Job from './Job'
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
-import { setQuery } from '../Redux/Actions/Actions';
+import { handleSubmitWithThunk, setQuery } from '../Redux/Actions/Actions';
+import { setJobs } from '../Redux/Actions/Actions';
 
 const mapStateToProps = state => {
   return {
-    query: state.query,
-    jobs: state.jobs,
-    favs: state.favs
+    query: state.search.query,
+    jobs: state.search.jobs,
+    favs: state.favs.favs
     
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    setQuery: query => {
+    setQueryForD: query => {
       dispatch(setQuery(query));
-    },
-    setJobs: jobs =>{
-      dispatch({
-        type:"JOBS",
-        payload: jobs
-      })
     }
   };
 };
@@ -32,25 +27,11 @@ const MainSearch = (props) => {
   const baseEndpoint = 'https://strive-jobs-api.herokuapp.com/jobs?search='
 
   const handleChange = (e) => {
-    props.setQuery(e.target.value)
+    props.setQueryForD(e.target.value)
   }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    try {
-      const response = await fetch(baseEndpoint + props.query + '&limit=20')
-      if (response.ok) {
-        const { data } = await response.json()
-        props.setJobs(data);
-       // console.log(data);
-      } else {
-        alert('Error fetching results')
-      }
-    } catch (error) {
-      console.log(error)
-    }//finally{console.log(props.jobs)}
-  }
+  const handleSubmit = (e) =>{
+    e.preventDefault();
+  handleSubmitWithThunk(e,baseEndpoint,props.query)}
 
   return (
     <Container>
