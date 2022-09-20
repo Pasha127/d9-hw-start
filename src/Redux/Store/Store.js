@@ -23,9 +23,9 @@ const persistConfig = {
 
 
 export const initialState = {
-  search: {jobs:[],query:"" },
+  search: {jobs:[],query:"", load: false },
   favs:{favs:[]},
-  load:{loaded:false}
+ /*  load:{load:false} */
 } 
 
 const bigReducer = combineReducers({

@@ -25,12 +25,12 @@ export const setDelFav = fav =>({
     payload: fav
   });
 export const handleSubmitWithThunk = (q) => {
-    setLoading(true);
-    const baseEndpoint = 'https://strive-jobs-api.herokuapp.com/jobs?search='
-    console.log("1 think")
-    return async (dispatch, getState)=>{
+  const baseEndpoint = 'https://strive-jobs-api.herokuapp.com/jobs?search='
+  console.log("1 think")
+  return async (dispatch, getState)=>{
     try {
-        console.log("2 thank",baseEndpoint,q)
+      console.log("2 thank",baseEndpoint,q)
+      dispatch(setLoading(true));
       const response = await fetch(baseEndpoint + q + '&limit=40')
       if (response.ok) {
         const { data } = await response.json()
@@ -41,5 +41,5 @@ export const handleSubmitWithThunk = (q) => {
       }
     } catch (error) {
       console.log(error)
-    }finally{console.log("3 thunk");setLoading(false);}
+    }finally{console.log("3 thunk");dispatch(setLoading(false));}
   }}

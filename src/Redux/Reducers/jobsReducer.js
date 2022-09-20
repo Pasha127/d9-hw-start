@@ -1,5 +1,6 @@
-import { JOBS, SEARCH } from "../Actions/Actions";
+import { JOBS, LOADING, SEARCH } from "../Actions/Actions";
 import { initialState } from "../Store/Store";
+
 
 /* const initialState = {    
     query: "" ,
@@ -17,7 +18,11 @@ const JobsReducer = (state = initialState.search, action) => {
           ...state,
           jobs: action.payload          
         };                 
-        
+      case LOADING:
+        return{
+          ...state,
+          load: action.payload
+        }
       default:
         return state; 
     }

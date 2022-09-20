@@ -9,8 +9,8 @@ const mapStateToProps = state => {
   return {
     query: state.search.query,
     jobs: state.search.jobs,
-    favs: state.favs.favs
-    
+    favs: state.favs.favs,
+    load: state.search.load
   };
 };
 
@@ -21,7 +21,7 @@ const mapDispatchToProps = dispatch => {
     },
     handleSub: query => { 
       dispatch( handleSubmitWithThunk(query));
-    }    
+    }   
   };  
 };
 
@@ -37,10 +37,11 @@ const MainSearch = (props) => {
     console.log("0 consider",props.query);
     props.handleSub(props.query);
 }
+  
 
   return (
     <>
-    <Loader></Loader>
+    {props.load && <Loader></Loader>}
     <Container>
       <Row>
         <Col xs={10} className="mx-auto my-3">

@@ -1,35 +1,15 @@
 import { Spinner} from 'react-bootstrap'
-import { connect } from "react-redux";
 
-import { setLoading} from '../Redux/Actions/Actions';
-
-
-const mapStateToProps = state => {
-  return {    
-    isLoaded: state.load.loaded
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-   setLoad: loadBool => {
-      dispatch(setLoading(loadBool));
-    }
-  };  
-};
-
-const Loader = (props) => {  
+const Loader = () => {  
  
-  return (
-    <>
-    {/* {console.log(props)} */}
-    {props.isloaded && <div className='loadContainer'>
+  return (       
+     <div className='loadContainer'>
+        {console.log("I'm LOADING!")}
         <Spinner animation="border" role="status">
             <span className="sr-only">Loading...</span>
         </Spinner>
-    </div>}
-    </>
+    </div>    
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Loader)
+export default Loader
